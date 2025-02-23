@@ -16,7 +16,7 @@ export class UpdateCustomer {
 
         const customerUpdated = customer.update(name, salary, companyValue);
         await this.repo.update(customerUpdated);
-        return { message: 'Cliene foi atualizado com sucesso' };
+        return { message: 'Cliente foi atualizado com sucesso' };
     }
 }
 
