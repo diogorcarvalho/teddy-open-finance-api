@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { NotFoundException } from '@nestjs/common';
 import { DeleteCustomer } from './../src/domain/use-cases/delete-customer';
 import { CustomerRepository } from './../src/domain/repositories/customer-repository';
-import { Customer } from 'src/domain/entities/customer';
+import { Customer } from './../src/domain/entities/customer';
 
 describe('DeleteCustomer', () => {
     let deleteCustomer: DeleteCustomer;
