@@ -36,7 +36,7 @@ describe('CreateCustomer', () => {
     jest.spyOn(customerRepository, 'create').mockResolvedValue(undefined);
 
     await expect(createCustomer.execAsync(input)).resolves.toEqual({
-      message: 'Novo cliene registrado com sucesso',
+      message: 'Novo cliente registrado com sucesso',
     });
 
     expect(customerRepository.findByName).toHaveBeenCalledWith('João da Silva');
