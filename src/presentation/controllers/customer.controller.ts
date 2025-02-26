@@ -69,7 +69,6 @@ export class CustomerController {
     @Delete(':id')
     @HttpCode(HttpStatus.OK)
     async delete(@Param('id') id: string): Promise<any> {
-        await this.deleteCustomer.execAsync({ id });
-        return { message: `Cliente removido com sucesso` };
+        return await this.deleteCustomer.execAsync({ id });
     }
 }
