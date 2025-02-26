@@ -16,7 +16,7 @@ export class CreateCustomer {
         }
 
         await this.repo.create(Customer.create(name, salary, companyValue));
-        return { message: 'Novo cliene registrado com sucesso' };
+        return { message: 'Novo cliente registrado com sucesso' };
     }
 }
 

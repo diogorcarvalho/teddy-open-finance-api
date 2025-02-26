@@ -51,7 +51,7 @@ describe('DeleteCustomer', () => {
 
         const result = await deleteCustomer.execAsync(input);
 
-        expect(result).toEqual({ message: 'Cliene removido com sucesso' });
+        expect(result).toEqual({ message: 'Cliente removido com sucesso' });
         expect(customerRepository.findById).toHaveBeenCalledWith(input.id);
         expect(customerRepository.delete).toHaveBeenCalledWith(input.id);
     });

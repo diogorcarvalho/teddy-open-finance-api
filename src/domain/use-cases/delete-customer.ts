@@ -15,7 +15,7 @@ export class DeleteCustomer {
         }
 
         await this.repo.delete(id);
-        return { message: 'Cliene removido com sucesso' };
+        return { message: 'Cliente removido com sucesso' };
     }
 }
 
