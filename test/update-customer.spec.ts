@@ -37,7 +37,7 @@ describe('UpdateCustomer', () => {
         jest.spyOn(customerRepository, 'findById').mockRejectedValue(null);
 
         await expect(updateCustomer.execAsync(input)).rejects.toThrowError(
-            new BadRequestException('Não existe esse cadastrado esse cliente informado'),
+            new BadRequestException('ID informado não está registrado no banco de dados'),
         );
     });
 

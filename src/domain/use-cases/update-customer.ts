@@ -11,7 +11,7 @@ export class UpdateCustomer {
         const customer = await this.repo.findById(id);
 
         if (!customer) {
-            throw new BadRequestException('Não existe esse cadastrado esse cliente informado');
+            throw new BadRequestException('ID informado não está registrado no banco de dados');
         }
 
         const customerUpdated = customer.update(name, salary, companyValue);
