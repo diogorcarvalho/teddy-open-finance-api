@@ -15,6 +15,9 @@ export class CustomerModel {
     @Column('float', { nullable: false })
     companyValue: number;
 
+    @Column('boolean', { nullable: false, default: false })
+    selected: boolean;
+
     @Column('timestamptz')
     createAt: Date;
 
@@ -23,5 +26,5 @@ export class CustomerModel {
 }
 
 export function modelToEntity(model: CustomerModel): Customer {
-    return new Customer(model.id, model.name, model.salary, model.companyValue, model.createAt, model.updateAt);
+    return new Customer(model.id, model.name, model.salary, model.companyValue, model.selected, model.createAt, model.updateAt);
 }

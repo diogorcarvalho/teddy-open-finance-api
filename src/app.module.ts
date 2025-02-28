@@ -7,6 +7,7 @@ import { CustomerRepositoryPostgres } from './infrastructure/repositories/custom
 import { CustomerController } from './presentation/controllers/customer.controller';
 import { UpdateCustomer } from './domain/use-cases/update-customer';
 import { DeleteCustomer } from './domain/use-cases/delete-customer';
+import { SelectCustomer } from './domain/use-cases/select-customer';
 
 @Module({
     imports: [
@@ -21,6 +22,7 @@ import { DeleteCustomer } from './domain/use-cases/delete-customer';
         CreateCustomer,
         UpdateCustomer,
         DeleteCustomer,
+        SelectCustomer,
     ],
     controllers: [CustomerController],
 })

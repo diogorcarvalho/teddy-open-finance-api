@@ -15,7 +15,7 @@ export class CreateCustomer {
             throw new BadRequestException('Já existem um cliente cadastrado com esse nome');
         }
 
-        await this.repo.create(Customer.create(name, salary, companyValue));
+        await this.repo.create(Customer.create(name, salary, companyValue, false));
         return { message: 'Novo cliente registrado com sucesso' };
     }
 }

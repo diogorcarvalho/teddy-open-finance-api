@@ -27,8 +27,8 @@ export class CustomerRepositoryPostgres implements CustomerRepository {
         return null;
     }
 
-    async findAll(): Promise<Customer[]> {
-        const models = await this.repository.find();
+    async findAll(selected: boolean): Promise<Customer[]> {
+        const models = await this.repository.find({ where: { selected } });
         return models.map((model) => modelToEntity(model));
     }
 

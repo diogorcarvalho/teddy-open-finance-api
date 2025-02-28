@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Inject, NotFoundException, Param, Patch, Post } from "@nestjs/common";
-import { ApiProperty } from "@nestjs/swagger";
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Inject, NotFoundException, Param, Patch, Post, Query } from "@nestjs/common";
+import { ApiBody, ApiProperty, ApiQuery } from "@nestjs/swagger";
 import { Customer } from "src/domain/entities/customer";
 import { CustomerRepository } from "src/domain/repositories/customer-repository";
 import { CreateCustomer } from "src/domain/use-cases/create-customer";
 import { DeleteCustomer } from "src/domain/use-cases/delete-customer";
+import { SelectCustomer } from "src/domain/use-cases/select-customer";
 import { UpdateCustomer } from "src/domain/use-cases/update-customer";
 
 export class CreateCustomerRequest {
@@ -29,6 +30,17 @@ export class UpdateustomerRequest {
 
     @ApiProperty()
     companyValue: number;
+
+    @ApiProperty()
+    selected: boolean;
+}
+
+export class SelectItemRequest {
+    @ApiProperty()
+    id: string;
+
+    @ApiProperty()
+    select: boolean;
 }
 
 @Controller('customers')
@@ -37,6 +49,7 @@ export class CustomerController {
         private readonly createCustomer: CreateCustomer,
         private readonly updateCustomer: UpdateCustomer,
         private readonly deleteCustomer: DeleteCustomer,
+        private readonly selectCustomer: SelectCustomer,
         @Inject('CustomerRepository') private readonly repo: CustomerRepository,
     ) { }
 
@@ -48,8 +61,9 @@ export class CustomerController {
 
     @Get()
     @HttpCode(HttpStatus.OK)
-    async getAll(): Promise<Customer[]> {
-        return await this.repo.findAll();
+    @ApiQuery({ name: 'selected', required: true })
+    async getAll(@Query('selected') selected: boolean): Promise<Customer[]> {
+        return await this.repo.findAll(selected);
     }
 
     @Get(':id')
@@ -64,6 +78,13 @@ export class CustomerController {
     @HttpCode(HttpStatus.OK)
     async update(@Body() input: UpdateustomerRequest): Promise<any> {
         return await this.updateCustomer.execAsync(input);
+    }
+
+    @Patch('select')
+    @HttpCode(HttpStatus.OK)
+    @ApiBody({ type: [SelectItemRequest] })
+    async select(@Body() itens: SelectItemRequest[]): Promise<any> {
+        return await this.selectCustomer.execAsync(itens);
     }
 
     @Delete(':id')

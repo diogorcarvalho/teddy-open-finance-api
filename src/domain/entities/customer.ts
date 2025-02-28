@@ -7,11 +7,17 @@ export class Customer {
         readonly name: string,
         readonly salary: number,
         readonly companyValue: number,
+        readonly selected: boolean,
         readonly createAt: Date,
         readonly updateAt: Date,
     ) { }
 
-    update(name: string, salary: number, companyValue: number): Customer {
+    toggleSelected(value: boolean): Customer {
+        const dateUpdated = new Date();
+        return new Customer(this.id, this.name, this.salary, this.companyValue, value, this.createAt, dateUpdated);
+    }
+
+    update(name: string, salary: number, companyValue: number, selected: boolean): Customer {
         if (!Customer.validName(name)) {
             throw new BadRequestException('Nome do cliente é inválido');
         }
@@ -24,8 +30,8 @@ export class Customer {
             throw new BadRequestException('Valor da emrpesa é inválido');
         }
         
-        const date = new Date();
-        return new Customer(this.id, name.trim(), salary, companyValue, this.createAt, date);
+        const dateUpdated = new Date();
+        return new Customer(this.id, name.trim(), salary, companyValue, selected, this.createAt, dateUpdated);
     }
 
     static validName(name: string): boolean {
@@ -38,7 +44,7 @@ export class Customer {
         return false;
     }
 
-    static create(name: string, salary: number, companyValue: number): Customer {
+    static create(name: string, salary: number, companyValue: number, selected: boolean): Customer {
         if (!this.validName(name)) {
             throw new BadRequestException('Nome do cliente é inválido');
         }
@@ -52,6 +58,6 @@ export class Customer {
         }
 
         const date = new Date();
-        return new Customer(v4(), name.trim(), salary, companyValue, date, date);
+        return new Customer(v4(), name.trim(), salary, companyValue, selected, date, date);
     }
 }
